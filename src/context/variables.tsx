@@ -1,31 +1,28 @@
 import React, { useState, createContext, useContext } from 'react';
 
-type Variables = Record<string, any>
 type SetVariables = React.Dispatch<React.SetStateAction<Variables>>
+type Variables = Record<string, any>
 
-type VariablesContextProviderValue = {
-    variables: Variables,
-    setVariables: SetVariables
-}
 
-const VariablesContext = createContext({
-  variables: {}, 
-  setVariables: () => ({})
-} as VariablesContextProviderValue)
+const SetVariablesContext = createContext((() => {}) as SetVariables) 
+const GetVariablesContext = createContext({} as Variables)
 
 export const VariablesProvider = ({children}: {children: React.ReactNode}) => {
   const [variables, setVariables] = useState<Variables>({})
   return (
-    <VariablesContext.Provider value={{
-      variables, 
-      setVariables,
-    } as VariablesContextProviderValue}>
+    <SetVariablesContext.Provider 
+      value={ setVariables  as SetVariables}
+    >
+      <GetVariablesContext.Provider value={variables}>
       {children}
-    </VariablesContext.Provider>
+      </GetVariablesContext.Provider>
+    </SetVariablesContext.Provider>
   )
 }
 
-export const useVariables = () => {
-  const {variables, setVariables} = useContext(VariablesContext)
-  return {variables, setVariables}
+export const useVariables = (): [Variables, SetVariables] => {
+  const setVariables = useContext(SetVariablesContext)
+  const variables = useContext(GetVariablesContext)
+
+  return [variables, setVariables]
 }

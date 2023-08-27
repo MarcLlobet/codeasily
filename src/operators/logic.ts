@@ -6,7 +6,7 @@ export const operators: Record<OperatorNameKey, Function> = {
       nestedCallback()
     }
   },
-  WHILE: (condition: Function, nestedCallback: Function = () => {}) => {
+  WHILE: (condition: Function, nestedCallback: Function = () => {}): void => {
       while(condition()){
         nestedCallback()
       }
