@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🔎
+        uses: actions/checkout@v3
+      
+      - name: Install node ⚙️
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install yarn 🧶
+        run: npm install --global yarn
+
+      - name: Install dependencies 📦
+        run: yarn --frozen-lockfile
+
+      - name: Build app ✨
+        run: yarn build
