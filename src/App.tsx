@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import { useVariables } from './context/variables';
 // import { operators } from './operators';
-import { Header } from './components/header';
+import { Layout } from './components/layout';
 
 function App() {
   const [variables, setVariables] = useVariables()
@@ -12,10 +11,12 @@ function App() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
     
   return (
-    <>
-      <Header>Codeasily</Header>
-      <div>{JSON.stringify(variables)}</div>
-    </>
+    <Layout.Main>
+      <Layout.Header>Codeasily</Layout.Header>
+      <Layout.Sidebar>Sidebar</Layout.Sidebar>
+      <Layout.Body><div>{JSON.stringify(variables)}</div></Layout.Body>
+      <Layout.Footer>Footer</Layout.Footer>
+    </Layout.Main>
   );
 }
 
