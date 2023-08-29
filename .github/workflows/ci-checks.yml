@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🔎
@@ -23,5 +23,5 @@ jobs:
       - name: Install dependencies 📦
         run: yarn --frozen-lockfile
 
-      - name: Build app ✨
+      - name: Run unit tests ✅
         run: yarn test
