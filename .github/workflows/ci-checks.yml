@@ -1,4 +1,4 @@
-name: CI
+name: CI Checks
 
 on:
   pull_request:
@@ -24,4 +24,4 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Build app ✨
-        run: yarn build
+        run: yarn test
